@@ -1,13 +1,16 @@
 package br.com.quarkus.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.*;
 
 @Entity
-public class Usuario {
+public class Usuario extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonbProperty("nome")
     @Column(name = "nome")
     private String name;
     private String cpf;

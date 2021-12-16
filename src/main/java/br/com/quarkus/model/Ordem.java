@@ -1,10 +1,12 @@
 package br.com.quarkus.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Ordem {
+public class Ordem extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,8 +14,8 @@ public class Ordem {
     private String type;
     private LocalDate date;
     private String Status;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @Column(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private Usuario usuario;
 
     public void setPrice(Double price) {
