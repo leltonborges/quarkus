@@ -8,23 +8,23 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-@QuarkusTest
+//@QuarkusTest
 public class BitcoinResourceTest {
 
-    @Test
+//    @Test
     public void testarSeStatusCodeDaRequE200(){
         RestAssured.given()
                 .get("bitcoins")
                 .then().statusCode(200);
     }
 
-    @Test
+//    @Test
     public void testarContextTypeEJson(){
         RestAssured.given()
                 .get("bitcoins")
                 .then().contentType(ContentType.JSON);
     }
-    @Test
+//    @Test
     public void testarTipodeRetornoEListDeBitcoins(){
         RestAssured.given()
                 .get("bitcoins")
