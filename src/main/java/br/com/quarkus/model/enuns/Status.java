@@ -11,7 +11,7 @@ public enum Status {
 
     private int id;
 
-    Status(int id){
+    Status(int id) {
         this.id = id;
     }
 
@@ -23,11 +23,10 @@ public enum Status {
         this.id = id;
     }
 
-    public static Type forStatus(Integer intStatus){
-        for (Type t: Type.values()){
-            return  Arrays.stream(Type.values())
-                    .filter(type -> type.getId() == intStatus).findFirst().get();
-        }
-        throw new NotFoundException("intStatus not found");
+    public static Status forStatus(Integer intStatus) {
+        return Arrays.stream(Status.values())
+                .filter(type -> type.getId() == intStatus)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("intStatus not found"));
     }
 }

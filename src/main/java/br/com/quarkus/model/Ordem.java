@@ -10,22 +10,42 @@ import java.time.LocalDate;
 
 @Entity
 public class Ordem extends PanacheEntityBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @JsonbProperty("preco")
     @Column(name = "preco")
     private Double price;
+
     @JsonbProperty("tipo")
     @Column(name = "tipo")
+    @Enumerated(EnumType.STRING)
     private Type type;
+
     @JsonbProperty("data")
     @Column(name = "data")
     private LocalDate date;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Usuario usuario;
+
+    public Ordem() {
+    }
+
+    public Ordem(Long id, Double price, Integer type, LocalDate date, Integer status, Usuario usuario) {
+        this.id = id;
+        this.price = price;
+        this.type = Type.forType(type);
+        this.date = date;
+        this.status = Status.forStatus(status);
+        this.usuario = usuario;
+    }
 
     public Long getId() {
         return id;
@@ -55,6 +75,10 @@ public class Ordem extends PanacheEntityBase {
         this.type = Type.forType(type);
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -65,6 +89,9 @@ public class Ordem extends PanacheEntityBase {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+    public void setStatus(Integer status) {
+        this.status = Status.forStatus(status);
     }
 
     public Usuario getUsuario() {

@@ -8,7 +8,8 @@ public enum Type {
     VENDA(2);
 
     private Integer id;
-    Type(Integer id){
+
+    Type(Integer id) {
         this.id = id;
     }
 
@@ -20,18 +21,10 @@ public enum Type {
         this.id = id;
     }
 
-    public static Type forType(Integer intType){
-        for (Type t: Type.values()){
-            return  Arrays.stream(Type.values())
-                    .filter(type -> type.getId() == intType).findFirst().get();
-        }
-        throw new NotFoundException("intType not found");
-    }
-    public static Type forType(String typeString){
-        for (Type t: Type.values()){
-            return  Arrays.stream(Type.values())
-                    .filter(type -> type.toString() == typeString).findFirst().get();
-        }
-        throw new NotFoundException("typeString not found");
+    public static Type forType(Integer intType) {
+        return Arrays.stream(Type.values())
+                .filter(type -> type.getId() == intType)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("intType not found"));
     }
 }
