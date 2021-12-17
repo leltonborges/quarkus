@@ -3,11 +3,11 @@ package br.com.quarkus.resource;
 import br.com.quarkus.model.Usuario;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/users")
 public class UsuarioResource {
@@ -18,5 +18,13 @@ public class UsuarioResource {
     @PermitAll
     public void insertUser(Usuario user){
         Usuario.addUser(user);
+    }
+
+    @Path("/all")
+    @GET
+    @RolesAllowed({"USER","ADMIN"})
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuario> listAll(){
+        return Usuario.listAll();
     }
 }

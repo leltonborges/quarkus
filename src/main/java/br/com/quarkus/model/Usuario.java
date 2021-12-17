@@ -9,10 +9,12 @@ import io.quarkus.security.jpa.UserDefinition;
 import io.quarkus.security.jpa.Username;
 
 import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
 @UserDefinition
+@Table(name = "Usuario")
 public class Usuario extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,7 @@ public class Usuario extends PanacheEntityBase {
     private String cpf;
     @Username
     private String username;
-    @IgnoreProperty
+
     @Password
     private String password;
     @Roles
@@ -72,6 +74,7 @@ public class Usuario extends PanacheEntityBase {
         this.username = username;
     }
 
+    @JsonbTransient
     public String getPassword() {
         return password;
     }

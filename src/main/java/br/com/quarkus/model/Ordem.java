@@ -5,10 +5,12 @@ import br.com.quarkus.model.enuns.Type;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "Ordem")
 public class Ordem extends PanacheEntityBase {
 
     @Id
@@ -90,8 +92,9 @@ public class Ordem extends PanacheEntityBase {
     public void setStatus(Status status) {
         this.status = status;
     }
-    public void setStatus(Integer status) {
-        this.status = Status.forStatus(status);
+
+    public void setStatus(String status) {
+        this.status = Status.valueOf(status);
     }
 
     public Usuario getUsuario() {

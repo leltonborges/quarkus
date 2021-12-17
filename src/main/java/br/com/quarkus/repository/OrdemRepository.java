@@ -1,10 +1,18 @@
 package br.com.quarkus.repository;
 
 import br.com.quarkus.model.Ordem;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import br.com.quarkus.model.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
 
-@ApplicationScoped
-public class OrdemRepository implements PanacheRepository<Ordem> {
+//@ApplicationScoped
+//public class OrdemRepository implements PanacheRepository<Ordem> {
+@Repository
+public interface OrdemRepository extends JpaRepository<Ordem, Long> {
+//    @Query("select o from Ordem o letf join o.usuario u where u.userName = :username ")
+//    List<Ordem> findByOrderByUsuario(@Param("username") String userName);
 }
