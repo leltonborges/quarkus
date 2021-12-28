@@ -1,0 +1,43 @@
+version: '3.9'
+
+x-common-variables: &global-variables
+  MARIADB_USER: quarkus
+  MARIADB_DATABASE: aplication-bitcoin
+  MARIADB_PASSWORD: quarkus
+  MARIADB_ROOT_PASSWORD: root
+
+services:
+  bitcoin-jvm:
+    image: leltondev/bitcoin-jvm:latest
+    container_name: bitcoin-jvm
+    build:
+      context: ./
+      dockerfile: src/main/docker/Dockerfile.${QUARKUS_MODE:-jvm}
+    environment:
+      <<: *global-variables
+      QUARKUS_DATASOURCE_URL: jdbc:mariadb://db-bitcoin:3306/aplication-bitcoin?autoReconnect=true
+    networks:
+      - app-quarkus
+    ports:
+      - 8082:8085
+    depends_on:
+      - db-bitcoin
+
+  db-bitcoin:
+    image: mariadb
+    container_name: db-bitcoin
+    environment:
+      <<: *global-variables
+    volumes:
+      - db.bitcoin:/var/lib/mysql/
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - app-quarkus
+    ports:
+      - 3307:3306
+
+networks:
+  app-quarkus:
+    driver: bridge
+volumes:
+  db.bitcoin:
