@@ -33,14 +33,7 @@ public class OrdemResource {
     @RolesAllowed({"ADMIN"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<Ordem> listAll(){
-        return ordemService.listAll();
+        return ordemService.findAll();
     }
 
-//    @Path("/user")
-//    @GET
-//    @RolesAllowed({"USER", "ADMIN"})
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Ordem> listAll(@Context SecurityContext securityContext){
-//        return ordemService.listAllOrdemForUser(securityContext.getUserPrincipal().getName());
-//    }
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Ordem")
+@Table(name = "ordem")
 public class Ordem extends PanacheEntityBase {
 
     @Id

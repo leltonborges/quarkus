@@ -29,16 +29,12 @@ public class OrdemService {
         ordem.setDate(LocalDate.now());
         ordem.setStatus(Status.ENVIADA);
         ordem.setUsuario(Usuario.findById(ordem.getUsuario().getId()));
-        ordemRepository.save(ordem);
+        ordemRepository.persist(ordem);
         return  Response.ok(ordem).status(Response.Status.CREATED).build();
     }
 
-    public List<Ordem> listAll(){
-        return ordemRepository.findAll();
-    }
-
-    public List<Ordem> listAllOrdemForUser(String userName){
-        return ordemRepository.findByOrderByUsuario(userName);
+    public List<Ordem> findAll(){
+        return ordemRepository.listAll();
     }
 
 }
