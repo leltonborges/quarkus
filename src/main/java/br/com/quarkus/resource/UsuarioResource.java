@@ -23,7 +23,6 @@ public class UsuarioResource {
     @Path("/all")
     @GET
     @RolesAllowed({"USER","ADMIN"})
-    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listAll(){
         return Usuario.listAll();
